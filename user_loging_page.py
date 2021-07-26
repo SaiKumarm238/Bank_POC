@@ -4,16 +4,20 @@ import tkinter.font as tkFont
 
 from pymysql import cursors
 from www_bank_com import login_home
-from forgot_password import otp
+#from forgot_password import otp
 import pymysql
 from tkinter import messagebox
-import user_home 
 
 def login_to_admin(root):
     root.destroy()
     from admin_home_page import admin_start
     admin_start()
 
+def closing_user_login(root,user_uid,user_pass):
+    root.destroy()
+    from user_home import user_credentials
+    user_credentials(user_uid,user_pass)
+    
 def user_login(root):
     #root=Tk()
     
@@ -26,22 +30,31 @@ def user_login(root):
             messagebox.showinfo("","Blank not allowed")
 
         else:
-            b = pymysql.connect(host='localhost',user='root',password='root',database='bank_of_ojas')
-            mycursor = b.cursor()
-            mycursor.execute('select * from bank3 where uid=%s and password=%s', (ent1.get(), ent2.get()))
-            row = mycursor.fetchone()
-            if row == None:
-                messagebox.showerror('error', 'Invalid Username and Password', parent=root)
-            else:
-                user_home(root)
-                mycursor.close()
-            # if uname == data_uid and password == data_password:
+            try:
+                b = pymysql.connect(host='localhost',user='root',password='root',database='bank_of_ojas')
+                mycursor = b.cursor()
+                mycursor.execute('select uid,Password from bank5 where uid=%s and password=%s', (ent1.get(), ent2.get()))
+                row = mycursor.fetchall()
+                # print("Enter")
+                # print(row)
+                user_uid = row[0][0]
+                user_pass = row[0][1]
+                # print(user_uid)
+                # print(user_pass)
+                if user_uid == ent1.get() and user_pass == ent2.get():
+                    closing_user_login(root,user_uid,user_pass)
+                    mycursor.close()
+                else:
+                    messagebox.showerror('error', 'Invalid Username and Password')   
+            except:
+                 messagebox.showerror('error', 'Invalid Username and Password')
+                 #user_login_start()
+                # if uname == data_uid and password == data_password:
             #     messagebox.showinfo("","Login sucess")
             #     #login_to_user(root)
             # else:
             #     messagebox.showinfo("","Incorrect username and password")
-                
-                
+                    
     global img
     global ent1
     global ent2
@@ -49,7 +62,7 @@ def user_login(root):
     n=0.5
 
     # Adding a background image
-    background_image =Image.open(r"C:\Users\sm21183\Tkinter\bg5.jpg")
+    background_image =Image.open(r"C:\Users\ss21193\Ojas_Wok\Python\Practice\database\sunday_poc\bg5.jpg")
     [imageSizeWidth, imageSizeHeight] = background_image.size
 
     newImageSizeWidth = int(imageSizeWidth*n)
@@ -91,7 +104,7 @@ def user_login(root):
     btn1 = Button(root,text="Login",bg='white',bd = 5, fg='Green', font=("Lucida Grande", 16),command=ok)
     btn1.place(relx=0.7,rely=0.7, relwidth=0.09,relheight=0.06)
     
-    btn2 = Button(root,text="Forgot Password",bg='white',bd = 5, fg='Orange',command= otp, font=("Lucida Grande", 14))
+    btn2 = Button(root,text="Forgot Password",bg='white',bd = 5, fg='Orange', font=("Lucida Grande", 14))
     btn2.place(relx=0.7,rely=0.6, relwidth=0.1,relheight=0.04)
     
     
@@ -109,6 +122,6 @@ def user_login_start():
     root.mainloop()
 
 
-if '__name__'=='__main__':   
+if __name__=='__main__':   
     user_login_start()
     

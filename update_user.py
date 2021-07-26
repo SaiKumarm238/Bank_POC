@@ -73,12 +73,12 @@ def update_user():
                 b = pymysql.connect(host='localhost',user='root',password='root')
                 mycursor = b.cursor()
                 mycursor.execute("USE bank_of_ojas")
-                mycursor.execute("SELECT Aadhar FROM bank3 WHERE Aadhar='"+t1.get()+"'")
+                mycursor.execute("SELECT Aadhar FROM bank5 WHERE Aadhar='"+t1.get()+"'")
                 check = mycursor.fetchall()
                 adhar_check = check[0][0]
                 if int(t1.get()) == adhar_check:
                    
-                    mycursor.execute("SELECT * FROM bank3 WHERE Aadhar='"+t1.get()+"'")
+                    mycursor.execute("SELECT * FROM bank5 WHERE Aadhar='"+t1.get()+"'")
                                      
                     user_adhar = int(t1.get())
                     fields = mycursor.fetchall()

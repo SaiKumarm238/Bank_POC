@@ -4,6 +4,7 @@ from tkinter import messagebox
 import tkinter as tk
 import re
 import pymysql
+
 regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
 
 def user_create():
@@ -38,25 +39,25 @@ def user_create():
         else:
             insert()
             messagebox.showinfo("User Created Successfully","User Created Successfully")  
-            #root.destroy() 
+            #root.destroy()
         
     def insert():
         
         if (Fname.get()=="" or Lname.get()==""):
                 messagebox.showinfo("Error","Enter all fields")
         else:
-            
             #quit_loop()
             b = pymysql.connect(host='localhost',user='root',password='root')
             mycursor = b.cursor()
             mycursor.execute("CREATE DATABASE IF NOT EXISTS bank_of_ojas")
             mycursor.execute("USE bank_of_ojas")
-            mycursor.execute("CREATE TABLE if not exists bank3(Fname varchar(20),Lname varchar(20),Gender varchar(10),DOB date,Phno bigint(50),Email varchar(30),Aadhar bigint(15),Address varchar(30),"
-                            "Pan varchar(20),Father varchar(20),Mother varchar(20),Uid varchar(20),Password varchar(20))")
-            mycursor.execute("INSERT INTO bank3 (Fname,Lname,Gender,DOB,Phno,Email,Aadhar,Address,Pan,Father,Mother,Uid,Password) VALUES('"+Fname.get()+"','"+Lname.get()+"','"+gender.get()+"','"+DOB.get()+"','"+Phno.get()+"','"+Email.get()+"','"+Adhar.get()+"','"+Address.get()+"','"+Pan_number.get()+"','"+Father_name.get()+"','"+Mother_name.get()+"','"+User_id.get()+"','"+User_Password.get()+"')")
+            mycursor.execute("CREATE TABLE if not exists bank5(Fname varchar(20),Lname varchar(20),Gender varchar(10),DOB date,Phno bigint(50),Email varchar(30),Aadhar bigint(15),Address varchar(30),Pan varchar(20),Father varchar(20),Mother varchar(20),Uid varchar(20),Password varchar(20),Account_Type Varchar(20) DEFAULT 'Savings Account',Account_No bigint(20) auto_increment,Balance float(10,7) DEFAULT 0.0,IFSC_Code varchar(15) DEFAULT 'HON000111',primary key(Account_No,Aadhar))")
+            #mycursor.execute("Alter table bank5 auto_increment=202100000001")
+            #mycursor.execute("alter table bank5 modify column Balance float(100,2)")
+            mycursor.execute("INSERT INTO bank5 (Fname,Lname,Gender,DOB,Phno,Email,Aadhar,Address,Pan,Father,Mother,Uid,Password) VALUES('"+Fname.get()+"','"+Lname.get()+"','"+gender.get()+"','"+DOB.get()+"','"+Phno.get()+"','"+Email.get()+"','"+Adhar.get()+"','"+Address.get()+"','"+Pan_number.get()+"','"+Father_name.get()+"','"+Mother_name.get()+"','"+User_id.get()+"','"+User_Password.get()+"')")
             b.commit()
-            messagebox.showinfo("Success","Inserted successfully.")
 
+            #messagebox.showinfo("Success","Inserted successfully.")
     # Radio_Value0 = tk.IntVar ()
     # def quit_loop():
     #     global gender
@@ -89,6 +90,7 @@ def user_create():
         root.title("Registration Form")
         temporary=StringVar()
 
+        
         label_0 = Label(root, text="User Creation",width=20,font=("bold", 20))
         label_0.place(x=700,y=53)
 
@@ -127,7 +129,7 @@ def user_create():
         DOB = Entry(root)
         DOB.place(x=900,y=280)
 
-
+        
         label_5 = Label(root, text="Phone Number",width=20,font=("bold", 10))
         label_5.place(x=700,y=330)
 
@@ -191,9 +193,10 @@ def user_create():
 
         User_Password = Entry(root)
         User_Password.place(x=900,y=720)
-
-        Button(root, text='Submit',width=20,bg='brown',fg='white',command=check).place(x=800,y=800)
         
+        
+        Button(root, text='Submit',width=20,bg='brown',fg='white',command=check).place(x=800,y=750)
+
         #messagebox.showinfo("","User Created sucessfully")
 
         # it is use for display the registration form on the window
@@ -202,5 +205,5 @@ def user_create():
         #print("registration form  successfully created...")
     
     user_entry()
-if '__name__'=='__main__':
+if __name__=='__main__':
     user_create()

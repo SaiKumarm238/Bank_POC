@@ -64,11 +64,11 @@ def delete_user():
                 b1 = pymysql.connect(host='localhost',user='root',password='root')
                 mycursor = b1.cursor()
                 mycursor.execute("USE bank_of_ojas")
-                mycursor.execute("SELECT Aadhar FROM bank3 WHERE Aadhar='"+t2.get()+"'")
+                mycursor.execute("SELECT Aadhar FROM bank5 WHERE Aadhar='"+t2.get()+"'")
                 check = mycursor.fetchall()
                 adhar_check = check[0][0]
                 if int(t2.get()) == adhar_check:
-                    mycursor.execute("SELECT * FROM bank3 WHERE Aadhar='"+t2.get()+"'")                                  
+                    mycursor.execute("SELECT * FROM bank5 WHERE Aadhar='"+t2.get()+"'")                                  
                     user_adhar = str(t2.get())
                     deleting_user_data(user_adhar)                      
                     b1.commit()

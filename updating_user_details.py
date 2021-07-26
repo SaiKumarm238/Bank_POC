@@ -24,7 +24,7 @@ def update_entry(user_adhar,*n):
         b = pymysql.connect(host='localhost',user='root',password='root')
         mycursor = b.cursor()
         mycursor.execute("USE bank_of_ojas")
-        mycursor.execute("UPDATE bank3 SET Fname='"+Fname.get()+"',Lname='"+Lname.get()+"',Gender='"+gender.get()+"',DOB='"+DOB.get()+"',Phno='"+Phno.get()+"',Email='"+Email.get()+"',Aadhar='"+Aadhar.get()+"',Address='"+Address.get()+"',Pan='"+Pan_number.get()+"',Father='"+Father_name.get()+"',Mother='"+Mother_name.get()+"',Uid='"+User_id.get()+"',Password='"+User_Password.get()+"' WHERE Aadhar='"+str(user_adhar)+"'")
+        mycursor.execute("UPDATE bank5 SET Fname='"+Fname.get()+"',Lname='"+Lname.get()+"',Gender='"+gender.get()+"',DOB='"+DOB.get()+"',Phno='"+Phno.get()+"',Email='"+Email.get()+"',Aadhar='"+Aadhar.get()+"',Address='"+Address.get()+"',Pan='"+Pan_number.get()+"',Father='"+Father_name.get()+"',Mother='"+Mother_name.get()+"',Uid='"+User_id.get()+"',Password='"+User_Password.get()+"' WHERE Aadhar='"+str(user_adhar)+"'")
         b.commit()
 
         MessageBox.showinfo("success","updated successfully")

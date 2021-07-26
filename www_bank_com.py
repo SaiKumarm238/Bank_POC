@@ -1,5 +1,5 @@
 from tkinter import *
-from PIL import ImageTk,Image #PIL -> Pillow
+#from PIL import ImageTk,Image #PIL -> Pillow
 from tkinter import messagebox
 import tkinter.font as tkFont
 
@@ -12,7 +12,6 @@ def user_to_login(root):
     root.destroy()
     from user_loging_page import user_login_start
     user_login_start()
-    
     
 def login_home():
     root = Tk()
@@ -28,21 +27,21 @@ def login_home():
     n=0.5
 
     # Adding a background image
-    background_image =Image.open(r"C:\Users\sm21183\Tkinter\bg5.jpg")
-    [imageSizeWidth, imageSizeHeight] = background_image.size
+    # background_image =Image.open(r"D:\PYTHON CLASS\CODING\POC_2\POC_Banking\poc_update\bg5.jpg")
+    # [imageSizeWidth, imageSizeHeight] = background_image.size
 
-    newImageSizeWidth = int(imageSizeWidth*n)
-    if same:
-        newImageSizeHeight = int(imageSizeHeight*n) 
-    else:
-        newImageSizeHeight = int(imageSizeHeight/n) 
+    # newImageSizeWidth = int(imageSizeWidth*n)
+    # if same:
+    #     newImageSizeHeight = int(imageSizeHeight*n) 
+    # else:
+    #     newImageSizeHeight = int(imageSizeHeight/n) 
         
-    background_image = background_image.resize((newImageSizeWidth,newImageSizeHeight),Image.ANTIALIAS)
-    img = ImageTk.PhotoImage(background_image)
-    Canvas1 = Canvas(root)
-    Canvas1.create_image(500,500,image = img)      
-    Canvas1.config(bg="white",width = newImageSizeWidth, height = newImageSizeHeight)
-    Canvas1.pack(expand=True,fill=BOTH)
+    # background_image = background_image.resize((newImageSizeWidth,newImageSizeHeight),Image.ANTIALIAS)
+    # img = ImageTk.PhotoImage(background_image)
+    # Canvas1 = Canvas(root)
+    # Canvas1.create_image(500,500,image = img)      
+    # Canvas1.config(bg="white",width = newImageSizeWidth, height = newImageSizeHeight)
+    # Canvas1.pack(expand=True,fill=BOTH)
 
     headingFrame1 = Frame(root,bg="black",bd=5)
     headingFrame1.place(relx=0.2,rely=0.1,relwidth=0.6,relheight=0.16)
